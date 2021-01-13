@@ -1,3 +1,6 @@
+Add bookmarks to PDF or DJVU files to better scroll through its contents.
+
+These small tools simplify the addititon of bookmarks/contents to PDF or DJVU files.
 
 # Installation
 ## Python module
@@ -27,7 +30,7 @@ First, you have to manually write the contents of the pdf file you want to put b
 ## Convert  `contents.txt` into `contents.bmk`
 The Python module `contents.py` converts the contents of the pdf file into a format enabling the addition  of bookmarks in the pdf with the chosen tool (CPDF or PDFTK). By default, it searches the `contents.txt` file and writes a `contents.bmk` file.
 
-The simplest line is therefore:
+The simplest line is therefore, in a Python terminal:
 ```
 from contents import Contents
 Contents().write4CPDF()
@@ -40,6 +43,9 @@ See the Python module for the following options:
 * debug option in case writing the `contents.bmk` file fails.
 
 ## Add the bookmarks to the file
+This now takes place in 
+a terminal.
+
 ### With CPDF:
 ```
 cpdf -add-bookmarks contents.bmk in.pdf -o out.pdf

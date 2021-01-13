@@ -264,14 +264,12 @@ def addPDFtoc(pdffile=None):
 
 if __name__=='__main__':
     # ---TEST CONTENTS
-    C = Contents('contents4.txt', debug=True)
+    C = Contents('contents.txt', debug=True)
     C.write4CPDF('cont_cpdf.bmk')
     C.write4PDFTK('cont_pdftk.bmk')
     C.write4DJVU('cont_djvu.bmk')
     
-    C = Contents('contents.txt')
-    
-    
+
     
     # ---TEST ADDPDFTOC---
     if False:

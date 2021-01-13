@@ -7,10 +7,10 @@ These small tools simplify the addititon of bookmarks/contents to PDF or DJVU fi
 Put the Python module `contents.py` somewhere in your python path. Or modify the python path to tell where to find the module.
 
 ## PDF manipulating tool
-Install either [CPDF]() or [PDFTK]().
+Install either [CPDF](https://community.coherentpdf.com/) or [PDFTK](https://www.pdflabs.com/tools/pdftk-server/).
 
 ## DJVU tool
-Make sure you have `djvused` installed.
+Make sure you have `djvused` installed (via [DjVuLibre](http://djvu.sourceforge.net/index.html)).
 
 ## Shell script
 Put the Shell script `addpdfcontents.sh` in an accessible folder, such as in `~/bin/`

@@ -1,4 +1,4 @@
-Add bookmarks to PDF or DJVU files to better scroll through its contents.
+Add bookmarks/outline to PDF or DJVU files to better scroll through its contents.
 
 These small tools simplify the addititon of bookmarks/contents to PDF or DJVU files.
 

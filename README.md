@@ -79,3 +79,14 @@ addpdfcontents.sh file.pdf
 
 **Warning**: the script is not yet robust to some special characters in the file name.
 
+
+# Other similar tools
+
+- [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*;
+- [simple-PDF-outline-adder](https://github.com/OpossumDaemon/simple-PDF-outline-adder) also uses `ghostscript`. The main drawback is that the outline text file must have, on each line, the page numbers BEFORE the title text; 
+- [https://github.com/eugmes/pdfoutline](https://github.com/eugmes/pdfoutline) is Hakshemm based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file).
+
+## See also
+
+- [QuickOutline](https://github.com/ririv/QuickOutline) has a GUI and seems to be very powerful (automatically creates the outline from the OCR of the outline)
+

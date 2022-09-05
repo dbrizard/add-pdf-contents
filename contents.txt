@@ -1,4 +1,4 @@
-offset 48
+close offset 48
 Affutage de tous les outils à bois tranchants 3
  Qu'est ce que l'affutage d'un outil ? 3
 Outillage de l'affuteur 4

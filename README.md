@@ -84,7 +84,7 @@ addpdfcontents.sh file.pdf
 
 - [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*;
 - [simple-PDF-outline-adder](https://github.com/OpossumDaemon/simple-PDF-outline-adder) also uses `ghostscript`. The main drawback is that the outline text file must have, on each line, the page numbers BEFORE the title text; 
-- [https://github.com/eugmes/pdfoutline](https://github.com/eugmes/pdfoutline) is Hakshemm based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file).
+- [pdfoutline](https://github.com/eugmes/pdfoutline) is Haskell based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file).
 
 ## See also
 

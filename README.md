@@ -77,8 +77,6 @@ The shell scrit allows, in on line, to directly add the bookmarks in a pdf file 
 addpdfcontents.sh file.pdf
 ```
 
-**Warning**: the script is not yet robust to some special characters in the file name.
-
 
 # Other similar tools
 

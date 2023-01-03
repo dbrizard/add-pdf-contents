@@ -65,7 +65,7 @@ pdftk file.pdf update_info metadata.txt output newfile.pdf
 ```
 
 ### With DJVU files
-Use the two following commands:
+Use the two following commands: 
 ```
 djvused -e print-outline book.djvu
 djvused -s -e 'set-outline contents.bmk' book.djvu

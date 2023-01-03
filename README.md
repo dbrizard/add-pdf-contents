@@ -71,12 +71,13 @@ djvused -e print-outline book.djvu
 djvused -s -e 'set-outline contents.bmk' book.djvu
 ```
 
-# The shell scrip `addpdfcontents.sh`
-The shell scrit allows, in on line, to directly add the bookmarks in a pdf file with CPDF, provided the `contents.txt` file is written.
+# The shell scripts `addpdfcontents.sh` and `watchpdfcontents.sh`
+The shell script `addpdfcontents.sh` allows, in on line, to directly add the bookmarks in a pdf file with CPDF, provided the `contents.txt` file is in the current directory.
 ```
 addpdfcontents.sh file.pdf
 ```
 
+The second shell script, `watchpdfcontents.sh`, allows to add the bookmarks in the pdf file each time the file `contents.txt` is modified. This can be useful to see the resulting pdf file while typing the contents file. 
 
 # Other similar tools
 

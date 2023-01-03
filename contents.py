@@ -16,7 +16,7 @@ Output defaults to 'contents.bmk'.
 
 One liner, provided the contents is written in 'contents.txt':
 > from contents import Contents
->  Contents().writePDFcontents()
+>  Contents().write4PDFTK()
 
 
 # Use of output contents file
@@ -59,6 +59,7 @@ class Contents(object):
     """
     
     """
+    
     def __init__(self, fname='contents.txt', pagesep=' ', indent=' ', debug=False):
         """
         
@@ -76,25 +77,38 @@ class Contents(object):
         self.indent = indent
         
         
-        self.detectOffset()
+        self.detectOffsetOpen()
         self.treatLines(debug=debug)
     
     
-    def detectOffset(self):
-        """Automatic detection of page number offset, written as first line
+    def detectOffsetOpen(self):
+        """Automatic detection of page number offset, written as first line.
+        Also scans first line for 'open' or 'close' keyword for bookmarks
         
         """
         fline = self.text[0]
+        if "open" in fline.lower():
+            self.Open = True
+            print("Open bookmarks option detected in first line.")
+            fline = fline.replace("open", "")
+        elif "close" in fline.lower():
+            self.Open = False
+            print("Close bookmarks option detected in first line.")
+            fline = fline.replace("close","")
+            
         if "offset" in fline:
             # remove trailing \n
             fline.rstrip()
             ind = fline.rfind(self.pagesep)
             self.offset = int( fline[ind+len(self.pagesep):] )
             print("Offset detected in first line: %i"%self.offset)
-            # remove offset line
-            self.text.pop(0)
+
         else:
             self.offset = None
+            
+        if hasattr(self, "Open") or "offset" in fline.lower():
+            # remove offset line
+            self.text.pop(0)            
     
     
     def arbitrateOffset(self, offset):
@@ -131,16 +145,25 @@ class Contents(object):
             if not len(lll)==0:
                 #---Count number of leading sep---
                 ni = len(lll) - len(lll.lstrip(self.indent))
-                level.append(ni+1)
                 
                 #---Get page number---
                 ind = lll.rfind(self.pagesep)
                 pagenumb = lll[ind+len(self.pagesep):]
-                page.append(int(pagenumb))
                 
                 #---Get title---
                 ttl = lll[:ind]
-                title.append(ttl.strip())
+
+                nonumber = False
+                try:
+                    page.append(int(pagenumb))
+                    fail = True
+                except ValueError:
+                    print("No page number: %s"%lll)
+                    nonumber = True
+                
+                if not nonumber:
+                    level.append(ni+1)
+                    title.append(ttl.strip())
         
         self.level = level
         self.page = page
@@ -168,8 +191,11 @@ class Contents(object):
         
         :param str fname: output filename
         :param int offset: page number offset
-        :param bool Open: children visible or not when pdf file loaded
+        :param bool Open: children visible or not when pdf file loaded.
         """
+        if hasattr(self, "Open"):
+            Open = self.Open
+            
         offset = self.arbitrateOffset(offset)
         with open(fname, 'w') as f:
             for tt, ll, pp in zip(self.title, self.level, self.page):
@@ -197,16 +223,16 @@ class Contents(object):
             for ii, (tt, ll, pp) in enumerate(zip(self.title, self.level, self.page)):
                 pp = pp + offset
                 if ii<n-1:
-                     if self.level[ii+1]==self.level[ii]:
-                         # next is the same level
-                         f.write('("%s" "#%i")\n'%(tt, pp))
-                     elif self.level[ii+1]>self.level[ii]:
-                         # there will be sublevels, keep parenthesis open
-                         f.write('("%s" "#%i"\n'%(tt, pp))
-                     elif self.level[ii+1]<self.level[ii]:
-                         # no more sublevels, close parentheses
-                         n_close = self.level[ii]-self.level[ii+1] +1
-                         f.write('("%s" "#%i"'%(tt, pp)+' )'*n_close +'\n')
+                    if self.level[ii+1]==self.level[ii]:
+                        # next is the same level
+                        f.write('("%s" "#%i")\n'%(tt, pp))
+                    elif self.level[ii+1]>self.level[ii]:
+                        # there will be sublevels, keep parenthesis open
+                        f.write('("%s" "#%i"\n'%(tt, pp))
+                    elif self.level[ii+1]<self.level[ii]:
+                        # no more sublevels, close parentheses
+                        n_close = self.level[ii]-self.level[ii+1] +1
+                        f.write('("%s" "#%i"'%(tt, pp)+' )'*n_close +'\n')
                 else:
                     n_close = ll + 1
                     f.write('("%s" "#%i"'%(tt, pp)+' )'*n_close +'\n')
@@ -263,7 +289,7 @@ def addPDFtoc(pdffile=None):
     
 
 if __name__=='__main__':
-    # ---TEST CONTENTS
+    #%% TEST CONTENTS
     C = Contents('contents.txt', debug=True)
     C.write4CPDF('cont_cpdf.bmk')
     C.write4PDFTK('cont_pdftk.bmk')
@@ -271,7 +297,7 @@ if __name__=='__main__':
     
 
     
-    # ---TEST ADDPDFTOC---
+    #%%TEST ADDPDFTOC---
     if False:
         print("TTTTTTTTTTTTTT")
         addPDFtoc() # XXX not finished at all

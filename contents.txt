@@ -21,7 +21,9 @@ Affutage des outils à bois 7
  Aiguisage des outils à tranchant curviligne 10
   Première méthode 10
   Deuxième méthode 10
++10
  Morfilage et affilage des outils à tranchant curviligne 10
+line with no page number
  Affutage du fer des vastringues à fût bois 11
  Affutage des planes 11
  Affutage des fers d'outils à moulurer 11
@@ -36,6 +38,7 @@ Affutage des scies à bois 14
   A) Une entaille 14
   B) Un tiers-point 15
   C) Un tourne-à-gauche 15
+-5
 Affutage des scies à buches 15
  Affutage 15
  Avoyage 16

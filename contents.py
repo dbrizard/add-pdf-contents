@@ -88,7 +88,7 @@ class Contents(object):
         Warning: 'close' option must be BEFORE 'offset' option
         
         """
-        fline = self.text[0]
+        fline = self.text[0]  # fisrt line
         if "open" in fline.lower():
             self.Open = True
             print("Open bookmarks option detected in first line.")
@@ -104,6 +104,7 @@ class Contents(object):
             ind = fline.rfind(self.pagesep)
             self.offset = int( fline[ind+len(self.pagesep):] )
             print("Offset detected in first line: %i"%self.offset)
+            # XXX offset option deprecated, + or - line should be prefered
 
         else:
             self.offset = None
@@ -138,34 +139,47 @@ class Contents(object):
         level = []
         title = []
         page = []
+        offset = self.offset
+        
         for ll in self.text:
             #---Remove trailing \n---
             lll = ll.rstrip()
             if debug:
                 print(lll)
-                
+            
+            
             if not len(lll)==0:
-                #---Count number of leading sep---
-                ni = len(lll) - len(lll.lstrip(self.indent))
-                
-                #---Get page number---
-                ind = lll.rfind(self.pagesep)
-                pagenumb = lll[ind+len(self.pagesep):]
-                
-                #---Get title---
-                ttl = lll[:ind]
-
-                nonumber = False
-                try:
-                    page.append(int(pagenumb))
-                    fail = True
-                except ValueError:
-                    print("No page number: %s"%lll)
-                    nonumber = True
-                
-                if not nonumber:
-                    level.append(ni+1)
-                    title.append(ttl.strip())
+                if lll[0]=='+':
+                    # Positive offset line
+                    print("Positive offset: +%s"%lll[1:])
+                    offset += int(lll[1:])
+                elif lll[0]=='-':
+                    # Negative offset line
+                    print("Negative offset: -%s"%lll[1:])
+                    offset -= int(lll[1:])
+                else:
+                    # Regular content line (title, page number)
+                    #---Count number of leading sep---
+                    ni = len(lll) - len(lll.lstrip(self.indent))
+                    
+                    #---Get page number---
+                    ind = lll.rfind(self.pagesep)
+                    pagenumb = lll[ind+len(self.pagesep):]
+                    
+                    #---Get title---
+                    ttl = lll[:ind]
+    
+                    nonumber = False
+                    try:
+                        page.append(int(pagenumb)+offset)
+                        fail = True
+                    except ValueError:
+                        print("No page number: %s"%lll)                    
+                        nonumber = True
+                    
+                    if not nonumber:
+                        level.append(ni+1)
+                        title.append(ttl.strip())
         
         self.level = level
         self.page = page
@@ -178,10 +192,10 @@ class Contents(object):
         :param str fname: output filename
         :param int offset: page number offset
         """
-        offset = self.arbitrateOffset(offset)
+        # offset = self.arbitrateOffset(offset)
         with open(fname, 'w') as f:
             for tt, ll, pp in zip(self.title, self.level, self.page):
-                pp = pp + offset
+                # pp = pp + offset
                 f.write('BookmarkBegin\n')
                 f.write('BookmarkTitle: %s\n'%tt)
                 f.write('BookmarkLevel: %i\n'%ll)
@@ -198,10 +212,10 @@ class Contents(object):
         if hasattr(self, "Open"):
             Open = self.Open
             
-        offset = self.arbitrateOffset(offset)
+        # offset = self.arbitrateOffset(offset)
         with open(fname, 'w') as f:
             for tt, ll, pp in zip(self.title, self.level, self.page):
-                pp = pp + offset
+                # pp = pp + offset
                 if '"' in tt:
                     print('/!\ found illegal " character in string in:')
                     print(tt)                    
@@ -218,12 +232,12 @@ class Contents(object):
         :param str fname: output filename
         :param int offset: page number offset
         """
-        offset = self.arbitrateOffset(offset)
+        # offset = self.arbitrateOffset(offset)
         n = len(self.title)
         with open(fname, 'w') as f:
             f.write('(bookmarks\n')
             for ii, (tt, ll, pp) in enumerate(zip(self.title, self.level, self.page)):
-                pp = pp + offset
+                # pp = pp + offset
                 if ii<n-1:
                     if self.level[ii+1]==self.level[ii]:
                         # next is the same level
@@ -292,7 +306,7 @@ def addPDFtoc(pdffile=None):
 
 if __name__=='__main__':
     #%% TEST CONTENTS
-    C = Contents('contents.txt', debug=True)
+    C = Contents('contents.txt', debug=False)
     C.write4CPDF('cont_cpdf.bmk')
     C.write4PDFTK('cont_pdftk.bmk')
     C.write4DJVU('cont_djvu.bmk')

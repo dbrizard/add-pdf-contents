@@ -85,6 +85,8 @@ class Contents(object):
         """Automatic detection of page number offset, written as first line.
         Also scans first line for 'open' or 'close' keyword for bookmarks
         
+        Warning: 'close' option must be BEFORE 'offset' option
+        
         """
         fline = self.text[0]
         if "open" in fline.lower():
@@ -129,7 +131,7 @@ class Contents(object):
     
     
     def treatLines(self, debug=False):
-        """
+        """Read each line and get title, level (indentation) and page number
         
         :param bool debug: print lines for debugging purpose
         """

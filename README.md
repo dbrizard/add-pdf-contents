@@ -19,12 +19,13 @@ In case you only have PDFTK, the second part of the script has to be modified to
 
 # Usage
 ## Write the contents of the pdf/djvu file
-First, you have to manually write the contents of the pdf file you want to put bookmarks in:
+First, you have to manually write in a text file (e.g. `contents.txt`) the contents of the pdf file you want to put bookmarks in:
 
 * one line per bookmark;
 * blank lines are ignored;
 * the page number must be at the end of the line, seperated by a whitespace (other separator possible, not tested yet);
 * **indentation is functional**: the depth of the bookmark is proportional to the number of whitespaces at the beginning of the line;
+* page offsets in the form `+10` or `-8` on separate lines;
 * if you use CPDF, the caracter `"` is reserved and connot be used (see generated file `contents.bmk`).
 
 ## Convert  `contents.txt` into `contents.bmk`
@@ -81,7 +82,7 @@ The second shell script, `watchpdfcontents.sh`, allows to add the bookmarks in t
 
 # Other similar tools
 
-- [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*. Very slow but page number offset can be given anywhere in the contents file (not only at the beginning);
+- [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*. __Very slow__ but page number offset can be given anywhere in the contents file (this functionality is now also available);
 - [simple-PDF-outline-adder](https://github.com/OpossumDaemon/simple-PDF-outline-adder) also uses `ghostscript`. The main drawback is that the outline text file must have, on each line, the page numbers BEFORE the title text; 
 - [pdfoutline](https://github.com/eugmes/pdfoutline) is Haskell based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file).
 

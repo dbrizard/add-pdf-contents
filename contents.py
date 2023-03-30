@@ -107,28 +107,28 @@ class Contents(object):
             # XXX offset option deprecated, + or - line should be prefered
 
         else:
-            self.offset = None
+            self.offset = 0  #None
             
         if hasattr(self, "Open") or "offset" in fline.lower():
             # remove offset line
             self.text.pop(0)            
     
     
-    def arbitrateOffset(self, offset):
-        """
+    # def arbitrateOffset(self, offset):
+    #     """
         
-        :param int offset: offset given while calling write4XXX method
-        """
-        if offset is None and self.offset is not None:
-            final_offset = self.offset
-        elif offset is not None and self.offset is None:
-            final_offset = offset
-        elif offset is not None and self.offset is not None:
-            final_offset = self.offset
-        elif offset is None and self.offset is None:
-            final_offset = 0
+    #     :param int offset: offset given while calling write4XXX method
+    #     """
+    #     if offset is None and self.offset is not None:
+    #         final_offset = self.offset
+    #     elif offset is not None and self.offset is None:
+    #         final_offset = offset
+    #     elif offset is not None and self.offset is not None:
+    #         final_offset = self.offset
+    #     elif offset is None and self.offset is None:
+    #         final_offset = 0
         
-        return final_offset        
+    #     return final_offset        
     
     
     def treatLines(self, debug=False):

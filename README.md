@@ -13,7 +13,7 @@ Install either [CPDF](https://community.coherentpdf.com/) or [PDFTK](https://www
 Make sure you have `djvused` installed (via [DjVuLibre](http://djvu.sourceforge.net/index.html)).
 
 ## Shell script
-Put the Shell script `addpdfcontents.sh` in an accessible folder, such as in `~/bin/`
+Put the Shell scripts (`.sh` files) in an accessible folder, such as in `~/bin/`
 
 In case you only have PDFTK, the second part of the script has to be modified to use PDFTK instead of CPDF.
 
@@ -72,13 +72,16 @@ djvused -e print-outline book.djvu
 djvused -s -e 'set-outline contents.bmk' book.djvu
 ```
 
-# The shell scripts `addpdfcontents.sh` and `watchpdfcontents.sh`
-The shell script `addpdfcontents.sh` allows, in on line, to directly add the bookmarks in a pdf file with CPDF, provided the `contents.txt` file is in the current directory.
+# The shell scripts
+The shell script `addpdfcontents.sh` allows, in one line, to directly add the bookmarks in a pdf file with CPDF, provided the `contents.txt` file is in the current directory.
 ```
 addpdfcontents.sh file.pdf
 ```
 
-The second shell script, `watchpdfcontents.sh`, allows to add the bookmarks in the pdf file each time the file `contents.txt` is modified. This can be useful to see the resulting pdf file while typing the contents file. 
+The shell script `adddjvucontents.sh` does the same on djvu files, using `djvused`.
+
+The thrid shell script, `watchpdfcontents.sh`, allows to add the bookmarks in the pdf file each time the file `contents.txt` is modified. This can be useful to see the resulting pdf file while typing the contents file. 
+
 
 # Other similar tools
 
@@ -88,5 +91,6 @@ The second shell script, `watchpdfcontents.sh`, allows to add the bookmarks in t
 
 ## See also
 
-- [QuickOutline](https://github.com/ririv/QuickOutline) has a GUI and seems to be very powerful (automatically creates the outline from the OCR of the outline)
+- [QuickOutline](https://github.com/ririv/QuickOutline) has a GUI and seems to be very powerful (automatically creates the outline from the OCR of the outline);
+- [HandyOutliner](https://handyoutlinerfo.sourceforge.net/) also treats PDF and DJVU files, GUI based. 
 

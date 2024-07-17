@@ -82,12 +82,19 @@ The shell script `adddjvucontents.sh` does the same on djvu files, using `djvuse
 
 The thrid shell script, `watchpdfcontents.sh`, allows to add the bookmarks in the pdf file each time the file `contents.txt` is modified. This can be useful to see the resulting pdf file while typing the contents file. 
 
+Last, the `autoindentcontents.sh` script performs automatic indentation of a text file containing the table of contents:
+
+- works only for "1.2.3 Subection title"-like TOC;
+- also has a `-d` option to remove lines of dots ("........" often present between title and page number).
+
 
 # Other similar tools
 
-- [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*. __Very slow__ but page number offset can be given anywhere in the contents file (this functionality is now also available);
+- [pdfoutline](https://github.com/yutayamamoto/pdfoutline) is very similar. It relies on `ghostscript` to add the outline to the pdf. *I did not find this tool when I developped the present one*. __Very slow__ but page number offset can be given anywhere in the contents file (this functionality is now also available). Can also significantly increase the size of the pdf (*I have to find out why and in which cases precisely*);
+- [pdfoutliner](https://github.com/pnlng/pdfoutliner) seems a good option (not tested, only recently discovered), relies on `pdftk`;
 - [simple-PDF-outline-adder](https://github.com/OpossumDaemon/simple-PDF-outline-adder) also uses `ghostscript`. The main drawback is that the outline text file must have, on each line, the page numbers BEFORE the title text; 
-- [pdfoutline](https://github.com/eugmes/pdfoutline) is Haskell based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file).
+- [pdfoutline](https://github.com/eugmes/pdfoutline) is Haskell based and requires the level of each entry to be written explicitly (and is not determined from indentation of the text file);
+- [doc-tools-toc](https://github.com/dalanicolai/doc-tools-toc) is a tool to manage table of contents (TOC) of pdf and djvu files with Emacs.
 
 ## See also
 

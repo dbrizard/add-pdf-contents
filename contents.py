@@ -217,8 +217,10 @@ class Contents(object):
             for tt, ll, pp in zip(self.title, self.level, self.page):
                 # pp = pp + offset
                 if '"' in tt:
-                    print('/!\ found illegal " character in string in:')
-                    print(tt)                    
+                    print('/!\ found and replaced illegal " character in string in:')
+                    print(tt)
+                    #print('=> Consider using “…” or «…»')
+                    tt = tt.replace('"', '“')
                 if Open:
                     line = '%i "%s" %i open\n'%(ll-1, tt, pp)
                 else:
@@ -238,6 +240,11 @@ class Contents(object):
             f.write('(bookmarks\n')
             for ii, (tt, ll, pp) in enumerate(zip(self.title, self.level, self.page)):
                 # pp = pp + offset
+                if '"' in tt:
+                    print('/!\ found and replaced illegal " character in string in:')
+                    print(tt)
+                    #print('=> Consider using “…” or «…»')
+                    tt = tt.replace('"', '“')
                 if ii<n-1:
                     if self.level[ii+1]==self.level[ii]:
                         # next is the same level
@@ -306,7 +313,7 @@ def addPDFtoc(pdffile=None):
 
 if __name__=='__main__':
     #%% TEST CONTENTS
-    C = Contents('contents.txt', debug=False)
+    C = Contents('contents.txt', debug=False)  # XXX change the example file
     C.write4CPDF('example_output/contents_cpdf.bmk')
     C.write4PDFTK('example_output/contents_pdftk.bmk')
     C.write4DJVU('example_output/contents_djvu.bmk')

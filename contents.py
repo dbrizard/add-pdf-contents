@@ -141,7 +141,7 @@ class Contents(object):
         page = []
         offset = self.offset
         
-        for ll in self.text:
+        for ii, ll in enumerate(self.text):
             #---Remove trailing \n---
             lll = ll.rstrip()
             if debug:
@@ -161,6 +161,16 @@ class Contents(object):
                     # Regular content line (title, page number)
                     #---Count number of leading sep---
                     ni = len(lll) - len(lll.lstrip(self.indent))
+                    # CHECK indent 'ni'
+                    if ii==0:
+                        if ni!=0:
+                            print('First bookmark should have zero indent: %s'%lll)
+                    else:
+                        # check indent does not increase more than one
+                        # decrease is not restrained
+                        if (ni+1 - level[-1])>1:  #level = ni+1 !!
+                            print("Wrong indent: %s"%(lll))
+                    
                     
                     #---Get page number---
                     ind = lll.rfind(self.pagesep)
@@ -172,9 +182,8 @@ class Contents(object):
                     nonumber = False
                     try:
                         page.append(int(pagenumb)+offset)
-                        fail = True
                     except ValueError:
-                        print("No page number: %s"%lll)                    
+                        print("No page number: %s"%(lll))                    
                         nonumber = True
                     
                     if not nonumber:

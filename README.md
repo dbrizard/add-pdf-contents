@@ -28,6 +28,8 @@ First, you have to manually write in a text file (e.g. `contents.txt`) the conte
 * page offsets in the form `+10` or `-8` on separate lines;
 * if you use CPDF, the caracter `"` is reserved and connot be used (see generated file `contents.bmk`).
 
+For better readability, you can use STL syntax highlighting in your text editor to better render the `contents.txt` file: numbers will be highlighted.
+
 ## Convert  `contents.txt` into `contents.bmk`
 The Python module `contents.py` converts the contents of the pdf file into a format enabling the addition  of bookmarks in the pdf with the chosen tool (CPDF or PDFTK). By default, it searches the `contents.txt` file and writes a `contents.bmk` file.
 

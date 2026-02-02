@@ -1,4 +1,8 @@
 BookmarkBegin
+BookmarkTitle: wrong first bookmark
+BookmarkLevel: 2
+BookmarkPageNumber: 53
+BookmarkBegin
 BookmarkTitle: Affutage de tous les outils à bois tranchants
 BookmarkLevel: 1
 BookmarkPageNumber: 51
@@ -9,6 +13,10 @@ BookmarkPageNumber: 51
 BookmarkBegin
 BookmarkTitle: Outillage de l'affuteur
 BookmarkLevel: 1
+BookmarkPageNumber: 52
+BookmarkBegin
+BookmarkTitle: wrong indent line
+BookmarkLevel: 3
 BookmarkPageNumber: 52
 BookmarkBegin
 BookmarkTitle: Choix et entretien d'un pavé en grès

@@ -1,7 +1,9 @@
 close offset 48
+ wrong first bookmark 5
 Affutage de tous les outils à bois tranchants 3
  Qu'est ce que l'affutage d'un outil ? 3
 Outillage de l'affuteur 4
+  wrong indent line 4
  Choix et entretien d'un pavé en grès 4
  Choix et entretien d'une meule en grès 4
  Choix et entretien d'une pierre à huile 5
